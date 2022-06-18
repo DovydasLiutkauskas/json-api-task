@@ -1,0 +1,8 @@
+.table {
+    border-radius: 12px;
+}
+
+tr:hover {
+    font-size: 1.1rem;
+    cursor: pointer;
+};
