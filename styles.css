@@ -6,3 +6,18 @@ tr:hover {
     font-size: 1.1rem;
     cursor: pointer;
 };
+
+h2 {
+    color: teal;
+}
+
+.back-button {
+    position: absolute;
+    top: -50px;
+}
+
+.create-button {
+    position: absolute;
+    top: -50px;
+    right: 0;
+}
