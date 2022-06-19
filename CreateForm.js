@@ -29,7 +29,7 @@ class CreateForm {
     this.htmlElement.id = 'form';
     this.htmlElement.className = 'd-flex justify-content-center'
     this.htmlElement.innerHTML = `
-      <form class="w-50">
+      <form class="w-75 mb-5">
           <h4>Create new record:</h4>
           <div class="form-group col-lg-4">
             <label for="userId">User ID</label>

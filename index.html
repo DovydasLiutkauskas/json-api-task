@@ -18,10 +18,38 @@
 </head>
 
 <body>
-    <section id="root" class="container">
+    <section id="root" class="container-lg">
         <img src="medusa.png" id="medusa-left" height="100px" />
         <img src="medusa.png" id="medusa-right" height="100px" />
-        <h2 class="text-center p-3 mb-5">Pressent Connection Internship</h2>
+        <h2 class="text-center p-3 mb-5">Present Connection Internship</h2>
+        <div class="filter-container">
+            <div class="filter sorting">
+                <label for="filter-selection"><strong>Please select filter:</strong></label>
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <select class="form-select" id="filter-selection">
+                            <option selected disabled>Select Filter Option</option>
+                            <option value="userId">User ID</option>
+                            <option value="id">Post ID</option>
+                            <option value="title">Title</option>
+                            <option value="body">Body</option>
+                        </select>
+                    </div>
+                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm" id="filter-input">
+                </div>
+                <select class="form-select" aria-label="sorting">
+                    <option selected disabled>Please select sorting option</option>
+                    <option value="userIdAsc">UserID - Asscending</option>
+                    <option value="userIdDesc">UserID - Descending</option>
+                    <option value="idAsc">ID - Asscending</option>
+                    <option value="idDesc">ID - Descending</option>
+                    <option value="titleAsc">Title - Asscending</option>
+                    <option value="titleDesc">Title - Descending</option>
+                    <option value="bodyAsc">Body - Asscending</option>
+                    <option value="bodyDesc">Body - Descending</option>
+                </select>
+            </div>
+        </div>
     </section>
 </body>
 

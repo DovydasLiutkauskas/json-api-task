@@ -14,9 +14,8 @@ class Table {
 
   getRecord = (id) => API.getOneData(this.saveData, this.showError, id);
 
-  addRecord = (title, body, userId) => {
-    API.addData(this.saveCreatedData, this.showError, title, body, userId);
-  }
+  addRecord = (title, body, userId) => API.addData(this.saveCreatedData,
+    this.showError, title, body, userId);
 
   saveCreatedData = (data) => {
     this.data = data;
@@ -70,9 +69,35 @@ class Table {
     this.htmlElement.append(form.htmlElement);
     this.backButtonSwitch();
     this.backButton.classList.remove('d-none');
+    document.querySelector('.filter').classList.add('d-none');
+  }
+
+  filterData() {
+    const filterInput = document.querySelector('#filter-input').value;
+    const filterSelection = document.querySelector('#filter-selection').value;
+    const tableBodyElements = document.querySelector('tbody');
+    const elementValue = tableBodyElements.querySelectorAll(`.${filterSelection}`);
+    elementValue.forEach(el => {
+      if (filterInput === "") {
+        el.parentElement.style.display = "";
+      } else if (filterSelection === 'userId' || filterSelection === 'id') {
+        if (el.innerText == filterInput) {
+          el.parentElement.style.display = "";
+        } else {
+          el.parentElement.style.display = "none";
+        }
+      } else {
+        if (el.innerText.indexOf(filterInput) !== -1) {
+          el.parentElement.style.display = "";
+        } else {
+          el.parentElement.style.display = "none";
+        }
+      }
+    });
   }
 
   render() {
+    this.htmlElement.innerHTML = '';
     this.backButtonSwitch();
     this.createButtonSwitch();
     this.tableHeaderRender();
@@ -87,6 +112,7 @@ class Table {
       this.table.append(this.tableHeader, this.tableBody);
       this.htmlElement.append(this.table);
       this.backButton.classList.add('d-none');
+      document.querySelector('.filter').classList.remove('d-none');
     }
     else {
       const tableLine = new TableLine(this.data);
@@ -94,6 +120,8 @@ class Table {
       this.table.append(this.tableHeader, this.tableBody);
       this.htmlElement.append(this.table);
       this.backButton.classList.remove('d-none');
+      document.querySelector('.filter').classList.add('d-none');
     }
+    document.querySelector('#filter-input').addEventListener('keyup', () => this.filterData());
   }
 }
