@@ -16,20 +16,21 @@ class API {
     }
 
     static addData = (success, failure, dataTitle, dataBody, dataUserID) => {
-        fetch(`${serverURL}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                title: dataTitle,
-                body: dataBody,
-                userId: dataUserID
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            }
-        })
-            .then(response => response.json())
-            .then(success)
-            .catch(failure)
+        setTimeout(() => {
+            fetch(`${serverURL}`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: dataTitle,
+                    body: dataBody,
+                    userId: dataUserID
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            })
+                .then(response => response.json())
+                .then(success)
+                .catch(failure)
+        }, 1500);
     }
 };
-
