@@ -9,27 +9,28 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles.css">
-    <script src="API.js" defer></script>
-    <script src="TableLine.js" defer></script>
-    <script src="CreateForm.js" defer></script>
-    <script src="MainTable.js" defer></script>
-    <script src="main.js" defer></script>
+    <!-- API -->
+    <script src="js/API.js" defer></script>
+    <!-- COMPONENTS -->
+    <script src="js/components/TableLine.js" defer></script>
+    <script src="js/components/CreateForm.js" defer></script>
+    <script src="js/components/MainTable.js" defer></script>
+    <!-- MAIN JS FILE -->
+    <script src="js/main.js" defer></script>
+
     <title>API task</title>
 </head>
 
 <body>
     <section id="root" class="container-lg">
-        <img src="medusa.png" id="medusa-left" height="100px" />
-        <img src="medusa.png" id="medusa-right" height="100px" />
-        <h2 class="text-center p-3 mb-5">API task</h2>
+        <h2 class="text-center p-3 mb-1">API task</h2>
         <div class="filter-container">
             <div class="filter sorting">
                 <label for="filter-selection"><strong>Please select filter:</strong></label>
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <select class="form-select" id="filter-selection">
-                            <option selected disabled>Select Filter Option</option>
-                            <option value="userId">User ID</option>
+                            <option value="userId" selected>User ID</option>
                             <option value="id">Post ID</option>
                             <option value="title">Title</option>
                             <option value="body">Body</option>

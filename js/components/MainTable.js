@@ -14,13 +14,12 @@ class Table {
 
   getRecord = (id) => API.getOneData(this.saveData, this.showError, id);
 
-  addRecord = (title, body, userId) => API.addData(this.saveCreatedData,
+  addRecord = (title, body, userId) => API.addData(this.saveCreatedRecord,
     this.showError, title, body, userId);
 
-  saveCreatedData = (data) => {
+  saveCreatedRecord = (data) => {
     this.data = data;
-    const form = document.querySelector('#form');
-    form.remove();
+    document.querySelector('#form').remove();
     this.render();
   }
 
@@ -32,10 +31,9 @@ class Table {
   showError = (error) => console.error(error);
 
   init = () => {
-    this.table.className = 'table table-striped table-dark table-hover'
+    this.table.className = 'table table-striped table-dark table-hover';
     this.htmlElement.className = 'position-relative';
     this.fetchData();
-    // this.render();
   }
 
   tableHeaderRender() {
@@ -46,7 +44,7 @@ class Table {
     <th scope="col">Title</th>
     <th scope="col">Body</th>
     </tr>`;
-    this.tableHeader.className = 'text-center'
+    this.tableHeader.className = 'text-center';
   }
 
   backButtonSwitch() {
@@ -58,13 +56,13 @@ class Table {
 
   createButtonSwitch() {
     this.createButton.className = 'btn btn-outline-success create-button';
-    this.createButton.innerHTML = `<i class="bi bi-plus-circle"></i> Create New Record`
+    this.createButton.innerHTML = `<i class="bi bi-plus-circle"></i> Create New Record`;
     this.htmlElement.append(this.createButton);
-    this.createButton.addEventListener('click', this.addRecordRender)
+    this.createButton.addEventListener('click', this.addRecordRender);
   }
 
   addRecordRender = () => {
-    const form = new CreateForm(this.addRecord)
+    const form = new CreateForm(this.addRecord);
     this.htmlElement.innerHTML = '';
     this.htmlElement.append(form.htmlElement);
     this.backButtonSwitch();
@@ -96,16 +94,13 @@ class Table {
     });
   }
 
-  sortData(e) {
+  sortData() {
     const selectIndex = document.querySelector('#sorting').selectedIndex;
     const selectAttribute = document.querySelector('#sorting').options[selectIndex].getAttribute('data-sort');
     const selectValue = document.querySelector('#sorting').value;
     if (selectValue === 'userId' || selectValue === 'id') {
-      if (selectAttribute === 'ascending') {
-        this.data.sort((a, b) => a[selectValue] - b[selectValue]);
-      } else {
-        this.data.sort((a, b) => b[selectValue] - a[selectValue]);
-      }
+      this.data.sort((a, b) => a[selectValue] - b[selectValue]);
+      if (selectAttribute === 'descending') this.data.reverse();
     } else {
       this.data.sort((a, b) => {
         let fa = a[selectValue].toLowerCase();
@@ -114,19 +109,17 @@ class Table {
         if (fb > fa) return 1;
         return 0;
       });
-      if (selectAttribute === 'descending') {
-        this.data.reverse();
-      }
+      if (selectAttribute === 'descending') this.data.reverse();
     }
     this.render();
   }
 
   render() {
     this.htmlElement.innerHTML = '';
+    this.tableBody.innerHTML = '';
     this.backButtonSwitch();
     this.createButtonSwitch();
     this.tableHeaderRender();
-    this.tableBody.innerHTML = '';
     if (Array.isArray(this.data)) {
       const tableLines = this.data.map(({ id, ...data }) => new TableLine({
         id,
@@ -138,8 +131,7 @@ class Table {
       this.htmlElement.append(this.table);
       this.backButton.classList.add('d-none');
       document.querySelector('.filter').classList.remove('d-none');
-    }
-    else {
+    } else {
       const tableLine = new TableLine(this.data);
       this.tableBody.append(tableLine.htmlElement);
       this.table.append(this.tableHeader, this.tableBody);
@@ -148,6 +140,6 @@ class Table {
       document.querySelector('.filter').classList.add('d-none');
     }
     document.querySelector('#filter-input').addEventListener('keyup', () => this.filterData());
-    document.querySelector('#sorting').onchange = (e) => this.sortData(e);
+    document.querySelector('#sorting').onchange = () => this.sortData();
   }
 }

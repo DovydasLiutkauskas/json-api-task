@@ -6,14 +6,14 @@ class CreateForm {
   }
 
   formSubmit() {
-    this.htmlElement.className = 'd-flex flex-column align-items-center'
+    this.htmlElement.className = 'd-flex flex-column align-items-center';
     this.htmlElement.innerHTML = `
     <i class="bi bi-check2-circle"></i>
     <h4 class="success-message">Your record was succesfully submited!</h4>
     <span class="mt-3">Loading data...</span>
     <div class="spinner-border" role="status">
       <span class="sr-only"></span>
-    </div>`
+    </div>`;
   }
 
   sendNewData(e) {
@@ -27,9 +27,9 @@ class CreateForm {
 
   render() {
     this.htmlElement.id = 'form';
-    this.htmlElement.className = 'd-flex justify-content-center'
+    this.htmlElement.className = 'd-flex justify-content-center';
     this.htmlElement.innerHTML = `
-      <form class="w-75 mb-5">
+      <form class="w-75 mb-3">
           <h4>Create new record:</h4>
           <div class="form-group col-lg-4">
             <label for="userId">User ID</label>
@@ -44,7 +44,7 @@ class CreateForm {
           <textarea type="text" class="form-control" rows="10" id="body" placeholder="Enter body text" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
-      </form>`
+      </form>`;
     this.htmlElement.querySelector('form').addEventListener('submit', (e) => this.sendNewData(e));
   }
 }
