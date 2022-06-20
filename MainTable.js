@@ -96,6 +96,31 @@ class Table {
     });
   }
 
+  sortData(e) {
+    const selectIndex = document.querySelector('#sorting').selectedIndex;
+    const selectAttribute = document.querySelector('#sorting').options[selectIndex].getAttribute('data-sort');
+    const selectValue = document.querySelector('#sorting').value;
+    if (selectValue === 'userId' || selectValue === 'id') {
+      if (selectAttribute === 'ascending') {
+        this.data.sort((a, b) => a[selectValue] - b[selectValue]);
+      } else {
+        this.data.sort((a, b) => b[selectValue] - a[selectValue]);
+      }
+    } else {
+      this.data.sort((a, b) => {
+        let fa = a[selectValue].toLowerCase();
+        let fb = b[selectValue].toLowerCase();
+        if (fa < fb) return -1;
+        if (fb > fa) return 1;
+        return 0;
+      });
+      if (selectAttribute === 'descending') {
+        this.data.reverse();
+      }
+    }
+    this.render();
+  }
+
   render() {
     this.htmlElement.innerHTML = '';
     this.backButtonSwitch();
@@ -123,5 +148,6 @@ class Table {
       document.querySelector('.filter').classList.add('d-none');
     }
     document.querySelector('#filter-input').addEventListener('keyup', () => this.filterData());
+    document.querySelector('#sorting').onchange = (e) => this.sortData(e);
   }
 }
